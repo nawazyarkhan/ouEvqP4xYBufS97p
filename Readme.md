@@ -24,3 +24,79 @@ The data comes from direct marketing efforts of a European banking institution. 
 
 - Output (desired target):
 y - has the client subscribed to a term deposit? (binary)
+
+> **Repository structure begins here:*  
+> ```text
+> ├── .gitignore                   # Git ignore file
+> ├── data/                        # raw & processed data
+> │   └── raw/
+> │       └── term-deposit-marketing-2020.csv
+> ├── notebooks/
+> │   └── ExplorationNModeling/
+> │       └── TDM.ipynb            # notebook covering exploration & modelling
+> ├── reports/
+> │   └── figures/                 # generated figures and plots
+> ├── setup/
+> │   └── requirements.txt         # Python dependencies
+> └── README.md                    # this file
+> ```  *
+
+
+# Term Deposit Prediction & ML Platform  
+*Automating Term-Deposit Subscription Prediction using LightGBM & Data Engineering Best Practices*
+
+## 🚀 Project Summary  
+In this project, I developed an end-to-end machine learning solution designed to predict whether customers will subscribe to a term deposit — a core business metric for our banking/client. The project harnessed the power of feature engineering, advanced encoding techniques, and model pipelines using LightGBM , Decision Tree, Logistic regression, XGboost, RandomForest where LightGBM outperfromed as compared to other models.
+
+During my role at Apziva, I took ownership of the full workflow: from data ingestion and exploratory modelling (via the notebook `TDM.ipynb`) through to model evaluation and deployment readiness. This solution addresses imbalanced class distribution, accounts for categorical and cyclic variables (such as the “month” field), and generates actionable insights for the business.
+
+## 🧭 Project Flow / Step-by-Step  
+
+### 1. Data Acquisition & Understanding  
+- Loaded the bank-marketing / term deposit dataset (source: internal CSV) containing customer attributes (age, job, marital status, education, contact, month, campaign, etc.).  
+- Inspected the target variable: subscription to term deposit (`yes`/`no`).  
+- Assessed class imbalance and feature distributions.
+
+### 2. Exploratory Data Analysis & Pre-processing  
+- Conducted summary statistics, missing value detection, and visualised key patterns (e.g., contact type, campaign effect, month distribution).  
+- Cleaned and standardised numerical and categorical features.  
+- Treated features like `month`  and others (e.g., `contact`, `job`, `housing` etc) via one-hot encoding to ensure correct modelling semantics.
+
+### 3. Feature Engineering  
+- Created new features capturing domain insights (for example, interaction between campaign count and previous contacts).  
+- Encoded categorical variables in a scalable manner using `OneHotEncoder(handle_unknown='ignore')` to accommodate unseen categories in production.  
+- Scaled numerical features via standardisation to enhance model convergence and stability.
+
+### 4. Model Construction & Training  
+- Set up the LightGBM classifier with an initial baseline, then tuned hyperparameters (learning rate, num_leaves, min_data_in_leaf, feature_fraction, bagging_fraction, etc.) to maximise ROC-AUC while controlling for overfitting.  
+- Utilised a stratified train/validation/test split to fairly assess model performance given the class imbalance.  
+- Applied early stopping and evaluation on the validation set to select the best iteration.
+
+### 5. Evaluation & Results  
+- Measured key performance metrics: ROC-AUC, accuracy, precision/recall for the minority class (subscribers).  
+- Visualised feature importance and confusion matrix to interpret which variables were most predictive.  
+- Demonstrated that the tuned model significantly outperformed baseline logistic regression, achieving strong predictive performance in the imbalanced classification context.
+
+### 6. Deployment Readiness & Delivery  
+- Packaged the preprocessing and modelling steps into reusable scripts/notebooks that can be run end-to-end (data load → preprocess → train → evaluate → predict).  
+- Provided clear instructions and modular code structure to enable future retraining, monitoring, and inference workflows.
+
+## 🧩 Key Contributions & Highlights  
+- Engineered and managed the full ML pipeline for a **business-critical predictive task** in the banking domain.  
+- Developed cyclic encoding for time-dependent features (e.g., month) to capture periodic behaviour.  
+- Implemented robust categorical encoding with unseen-category handling (`handle_unknown='ignore'`), improving production readiness.  
+- Optimised LightGBM hyperparameters specifically for an imbalanced classification problem, improving model performance significantly.  
+- Delivered documentation, modular code, and evaluation artifacts ready for hand-off to production or stakeholders.
+
+## 🎯 Concluding Remarks 
+This project underscores my ability to deliver **end-to-end machine learning solutions** that translate into measurable business value. I took initiative from data exploration through modelling and evaluation, demonstrating proficiency in handling imbalanced data, engineering meaningful features, and tuning advanced tree-based models.
+
+Please feel free to reachout for any queries! 
+
+---
+
+
+
+## 📄 Acknowledgements  
+
+Data source: Bank Marketing dataset (UCI / client internal data) — thanks to the team at Apziva for providing access.
